@@ -66,7 +66,7 @@
       <el-button plain icon="el-icon-edit" type="info" class="edit-live"
         >编辑直播标题</el-button
       >
-      <el-button type="danger" round class="begin-live">发起直播</el-button>
+      <el-button type="danger" round class="begin-live" @click="goLive()">发起直播</el-button>
     </el-dialog>
   </div>
 </template>
@@ -110,6 +110,9 @@ export default {
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);
     },
+    goLive(){
+      this.$router.push('/push')
+    }
   },
 };
 </script>
