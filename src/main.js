@@ -4,12 +4,10 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import router from './router'
 import store from './store'
-import ViewUI from 'view-design';
-import 'view-design/dist/styles/iview.css';
+import './assets/css/font.css'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);
-Vue.use(ViewUI);
 
 new Vue({
   router,

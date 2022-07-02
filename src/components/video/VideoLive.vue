@@ -11,8 +11,13 @@
         @click="goBack()"
       />
       <div class="live">直播专区</div>
-      <el-button type="danger" round @click="dialogVisible = true"
-        class="brgin-live-button">发起直播</el-button
+      <el-button
+        type="danger"
+        round
+        @click="dialogVisible = true"
+        class="begin-live-button"
+        icon="el-icon-platform-eleme"
+        >发起直播</el-button
       >
       <!--       <Button type="error" shape="circle" >
         <Icon custom="i-icon i-icon-shop_fill" size="24" />
@@ -23,11 +28,15 @@
     <!-- 直播模板 -->
     <div id="video-live" v-for="(item, index) in liveInfo" :key="item.id">
       <div id="video-live-img" :class="bgImg[index]">
-        <div class="left">
-          <img src="@/assets/images/live/hot.svg" alt="" class="left-img" />
+        <div class="left icon-color">
+          <!-- <img src="@/assets/images/live/hot.svg" alt="" class="left-img" /> -->
+          <i class="el-icon-s-data icon-color"></i>
           显示
         </div>
-        <div class="right">右边</div>
+        <div class="right icon-color">
+          <img src="@/assets/images/live/hot.svg" alt="" class="left-img" />
+          右边
+        </div>
       </div>
       <div class="title">
         {{ item.title }}
@@ -40,9 +49,9 @@
       title=""
       :visible.sync="dialogVisible"
       width="70%"
-      :center="true"
       :show-close="false"
       :limit="1"
+      style="text-align: center"
     >
       <el-upload
         class="avatar-uploader"
@@ -51,7 +60,7 @@
         :on-success="handleAvatarSuccess"
       >
         <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        <i v-else class="el-icon-picture avatar-uploader-icon"></i>
       </el-upload>
       <!-- 编辑直播  -->
       <el-button plain icon="el-icon-edit" type="info" class="edit-live"
@@ -59,21 +68,6 @@
       >
       <el-button type="danger" round class="begin-live">发起直播</el-button>
     </el-dialog>
-
-    <Modal v-model="modal1" title="">
-      <Upload
-        ref="upload"
-        :show-upload-list="false"
-        :format="['jpg', 'jpeg', 'png']"
-        multiple
-        action="//jsonplaceholder.typicode.com/posts/"
-        style="display: inline-block; width: 58px"
-      >
-        <div style="width: 58px; height: 58px; line-height: 58px">
-          <Icon type="ios-camera" size="20"></Icon>
-        </div>
-      </Upload>
-    </Modal>
   </div>
 </template>
 
@@ -82,7 +76,6 @@ export default {
   data() {
     return {
       dialogVisible: false,
-      modal1: false,
       imageUrl: "",
       liveInfo: [
         {
@@ -121,7 +114,10 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+#app {
+  height: 100vh;
+}
 .bg1 {
   background-image: url(https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg9.51tietu.net%2Fpic%2F2019-090915%2Fmu505pvrlwtmu505pvrlwt.jpg&refer=http%3A%2F%2Fimg9.51tietu.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1659104408&t=8a679dc24db6ed602b6ef9c4e69a0fd1);
 }
@@ -152,13 +148,13 @@ export default {
   text-align: center;
   margin: auto;
 }
-.brgin-live-button {
-   padding: 6px 12px;
+.begin-live-button {
+  padding: 6px 12px;
 }
 #video-live {
   float: left;
   width: 46%;
-  height: 20vh;
+  height: 25%;
   margin: 2%;
   border-radius: 5% 5% 0 0;
 }
@@ -176,13 +172,17 @@ export default {
   text-align: center;
   vertical-align: middle;
 }
+.icon-color {
+  color: white;
+}
 .right {
   float: right;
   width: 50%;
   line-height: 1.5em;
   border-radius: 0 5% 0 0;
   background-color: rgb(0, 1, 38);
-  text-align: calc();
+  text-align: center;
+  vertical-align: middle;
 }
 .title {
   overflow: hidden;
@@ -195,51 +195,46 @@ export default {
 
 /* 上传海报 */
 .avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    width: 100px;
-    height: 100px;
-  }
-  .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    line-height: 100px;
-    text-align: center;
-  }
-  .avatar {
-    width: 100px;
-    height: 100px;
-    display: block;
-  }
-.el-dialog--center .el-dialog__body{
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
   text-align: center;
 }
-.edit-live{
+.avatar {
+  width: 100px;
+  height: 100px;
+  display: block;
+}
+.edit-live {
   margin: 2em 0;
   width: 70%;
+  background: #909399;
+  border-color: #909399;
+  color: #fff;
 }
-.begin-live{
+.begin-live {
   width: 70%;
+  margin: 0;
 }
-
-.i-icon {
-  display: inline-block;
-  font-family: "custom-font" !important;
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  text-rendering: auto;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  vertical-align: middle;
+.el-icon-platform-eleme {
+  background: url("@/assets/images/live/live.png") center center no-repeat;
+  background-size: 20px;
+}
+.el-icon-platform-eleme:before {
+  content: "代替";
+  font-size: 16px;
+  visibility: hidden;
 }
 </style>

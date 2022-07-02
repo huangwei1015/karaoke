@@ -5,7 +5,7 @@
     <!--头部返回等-->
     <div id="header">
       <img
-        src="../assets/images/back.svg"
+        src="../../assets/images/live/back.svg"
         alt=""
         class="header-back"
         @click="goBack()"
@@ -16,7 +16,7 @@
       >
     </div>
     <!-- 直播模板 -->
-    <div id="component-live" v-for="item in liveInfo" :key="item.id">
+    <!--     <div id="component-live" v-for="item in liveInfo" :key="item.id">
       <div id="video-live" @click="lookLive()">
         <img
           src="https://img0.baidu.com/it/u=711328619,1513537385&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500"
@@ -28,7 +28,9 @@
           {{ item.title }}
         </div>
       </div>
-    </div>
+    </div> -->
+
+
   </div>
 </template>
 
@@ -36,6 +38,7 @@
 export default {
   data() {
     return {
+      imageUrl: "",
       liveInfo: [
         {
           id: 1,
@@ -61,6 +64,21 @@ export default {
     },
     lookLive() {
       console.log("看直播了");
+    },
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg";
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error("上传头像图片只能是 JPG 格式!");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+      }
+      return isJPG && isLt2M;
     },
   },
 };
@@ -107,4 +125,5 @@ export default {
   text-overflow: ellipsis;
   margin: 0 5%;
 }
+
 </style>
